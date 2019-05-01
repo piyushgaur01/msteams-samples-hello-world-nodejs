@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.setup = function() {
+module.exports.setup = function () {
     var builder = require('botbuilder');
     var teamsBuilder = require('botbuilder-teams');
     var bot = require('./bot');
@@ -38,8 +38,8 @@ module.exports.setup = function() {
     //     callback(null, response, 200);
     // });
 
-    bot.connector.onQuery('joinMeeting', function(event, query, callback) {
-        
+    bot.connector.onQuery('joinMeeting', function (event, query, callback) {
+
 
         // If the user supplied a title via the cardTitle parameter then use it or use a fake title
         var title = query.parameters && query.parameters[0].name === 'meetingId'
@@ -49,9 +49,14 @@ module.exports.setup = function() {
         // Build the data to send
         var attachments = [];
 
-        let ca = new builder.CardAction().title('Join').type('openUrl').value(`h323://${title}`);
+        const ca = new builder.CardAction().title('Join').type('openUrl').value(`h323://${title}`).toAction();
 
-        attachments.push(ca);
+        attachments.push(
+            new builder.ThumbnailCard()
+                .title(title)
+                .buttons(ca)
+                .toAttachment()
+        );
 
         // Build the response to be sent
         var response = teamsBuilder.ComposeExtensionResponse()

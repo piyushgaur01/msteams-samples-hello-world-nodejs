@@ -22,15 +22,7 @@
         "outline": "poly20x20.png",
         "color": "poly96x96.png"
     },
-    "accentColor": "#ff0000",
-    "staticTabs": [{
-        "entityId": "com.contoso.helloworld.hellotab",
-        "name": "Hello",
-        "contentUrl": "https://poly-bots.herokuapp.com/hello",
-        "scopes": [
-            "personal"
-        ]
-    }],
+    "accentColor": "#ffffff",
     "configurableTabs": [{
         "configurationUrl": "https://poly-bots.herokuapp.com/configure",
         "canUpdateConfiguration": true,
@@ -53,9 +45,9 @@
           "canUpdateConfiguration": true,
           "commands": [
             {
-              "id": "searchCmd",
-              "description": "Search you Todo's",
-              "title": "Search",
+              "id": "joinMeeting",
+              "description": "Join a meeting by id",
+              "title": "Join",
               "initialRun": true,
               "parameters": [
                 {
