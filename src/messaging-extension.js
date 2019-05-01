@@ -27,7 +27,7 @@ module.exports.setup = function () {
                         {
                             type: "openUrl",
                             title: "Join Meeting",
-                            value: `h323://${title}`
+                            value: `https://news.google.com`
                         }
                     ])
                     //.text(faker.lorem.paragraph())
