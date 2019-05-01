@@ -27,7 +27,7 @@ module.exports.setup = function () {
                 .text()
                 .buttons([
                     {
-                        type: "call",
+                        type: "openUrl",
                         title: "Join Meeting",
                         value: `h323:${title}`
                     }
