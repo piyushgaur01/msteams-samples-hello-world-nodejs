@@ -57,21 +57,15 @@ module.exports.setup = function (app) {
                 msg = new builder.Message(session).addAttachment(card);
                 break;
 
-            case 'openUrl':
+            case 'url':
                 card = {
                     'contentType': 'application/vnd.microsoft.card.adaptive',
                     'content': {
                         "type": "AdaptiveCard",
-                        "body": [
-                            {
-                                "type": "TextBlock",
-                                "text": "Click below to URL."
-                            }
-                        ],
                         "actions": [
                             {
                                 "type": "Action.OpenUrl",
-                                "title": "Join Meeting",
+                                "title": `Open ${input}`,
                                 "url": `https://${input}`
                             }
                         ],
