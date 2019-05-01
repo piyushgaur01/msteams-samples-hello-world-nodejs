@@ -49,12 +49,16 @@ module.exports.setup = function () {
         // Build the data to send
         var attachments = [];
 
-        const ca = new builder.CardAction().title('Join').type('openUrl').value(`h323://${title}`).toAction();
+        const caList = [];
+        
+        caList.push(new builder.CardAction()
+            .title('Join').type('openUrl').value(`h323://${title}`)
+        );
 
         attachments.push(
             new builder.ThumbnailCard()
                 .title(title)
-                .buttons(ca)
+                .buttons(caList)
                 .toAttachment()
         );
 
