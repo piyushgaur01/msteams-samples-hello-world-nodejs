@@ -24,11 +24,12 @@ module.exports.setup = function () {
         attachments.push(
             new builder.ThumbnailCard()
                 .title('Click to join meeting')
+                .text()
                 .buttons([
                     {
-                        type: "openUrl",
+                        type: "call",
                         title: "Join Meeting",
-                        value: `h323://${title}`
+                        value: `h323:${title}`
                     }
                 ])
                 //.text(faker.lorem.paragraph())
