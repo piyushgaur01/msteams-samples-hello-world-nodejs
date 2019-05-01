@@ -32,7 +32,7 @@ module.exports.setup = function (app) {
         const input = textArray[1];
         switch (command) {
             case 'join':
-                var card = {
+                let card = {
                     'contentType': 'application/vnd.microsoft.card.adaptive',
                     'content': {
                         "type": "AdaptiveCard",
@@ -57,14 +57,14 @@ module.exports.setup = function (app) {
                 break;
 
             case 'openUrl':
-                var card = {
+                let card = {
                     'contentType': 'application/vnd.microsoft.card.adaptive',
                     'content': {
                         "type": "AdaptiveCard",
                         "body": [
                             {
                                 "type": "TextBlock",
-                                "text": "Click below to join meeting."
+                                "text": "Click below to URL."
                             }
                         ],
                         "actions": [
@@ -81,6 +81,21 @@ module.exports.setup = function (app) {
                 msg = new builder.Message(session).addAttachment(card);
                 break;
             default:
+                let card = {
+                    'contentType': 'application/vnd.microsoft.card.adaptive',
+                    'content': {
+                        "type": "AdaptiveCard",
+                        "body": [
+                            {
+                                "type": "TextBlock",
+                                "text": "Command not found."
+                            }
+                        ],
+                        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                        "version": "1.0"
+                    }
+                };
+                msg = new builder.Message(session).addAttachment(card);
                 break;
         }
         session.send(msg);
