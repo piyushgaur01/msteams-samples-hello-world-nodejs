@@ -29,7 +29,7 @@ module.exports.setup = function (app) {
         var text = teams.TeamsMessage.getTextWithoutMentions(session.message);
         var textArray = text.split(' ');
         const command = textArray[0];
-        const vmr = textArray[1];
+        const input = textArray[1];
         switch (command) {
             case 'join':
                 var card = {
@@ -46,7 +46,7 @@ module.exports.setup = function (app) {
                             {
                                 "type": "Action.OpenUrl",
                                 "title": "Join Meeting",
-                                "url": `h323://${vmr}`
+                                "url": `h323://${input}`
                             }
                         ],
                         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
@@ -56,6 +56,30 @@ module.exports.setup = function (app) {
                 msg = new builder.Message(session).addAttachment(card);
                 break;
 
+            case 'openUrl':
+                var card = {
+                    'contentType': 'application/vnd.microsoft.card.adaptive',
+                    'content': {
+                        "type": "AdaptiveCard",
+                        "body": [
+                            {
+                                "type": "TextBlock",
+                                "text": "Click below to join meeting."
+                            }
+                        ],
+                        "actions": [
+                            {
+                                "type": "Action.OpenUrl",
+                                "title": "Join Meeting",
+                                "url": `https://${input}`
+                            }
+                        ],
+                        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                        "version": "1.0"
+                    }
+                };
+                msg = new builder.Message(session).addAttachment(card);
+                break;
             default:
                 break;
         }
