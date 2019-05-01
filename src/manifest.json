@@ -23,22 +23,45 @@
         "color": "poly96x96.png"
     },
     "accentColor": "#ffffff",
-    "configurableTabs": [{
-        "configurationUrl": "https://poly-bots.herokuapp.com/configure",
-        "canUpdateConfiguration": true,
-        "scopes": [
-            "team"
-        ]
-    }],
-    "bots": [{
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://poly-bots.herokuapp.com/configure",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ]
+        }
+    ],
+    "bots": [
+        {
+            "botId": "743fe636-3405-4f09-bc8a-96d12883db40",
+            "scopes": [
+                "personal",
+                "team"
+            ]
+        }
+    ],
+    "composeExtensions": [
+    {
         "botId": "743fe636-3405-4f09-bc8a-96d12883db40",
-        "needsChannelSelector": false,
-        "isNotificationOnly": false,
-        "scopes": [
-            "team",
-            "personal"
+        "canUpdateConfiguration": true,
+        "commands": [
+          {
+            "id": "joinMeeting",
+            "description": "Join a meeting by id",
+            "title": "Join",
+            "initialRun": true,
+            "parameters": [
+              {
+                "name": "meetingId",
+                "description": "Enter meeting id",
+                "title": "Meeting Id"
+              }
+            ]
+          }
         ]
-    }],
+      }
+    ],
     "permissions": [],
     "validDomains": []
 }
