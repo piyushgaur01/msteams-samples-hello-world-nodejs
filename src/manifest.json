@@ -41,27 +41,6 @@
             ]
         }
     ],
-    "composeExtensions": [
-    {
-        "botId": "743fe636-3405-4f09-bc8a-96d12883db40",
-        "canUpdateConfiguration": true,
-        "commands": [
-          {
-            "id": "joinMeeting",
-            "description": "Join a meeting by id",
-            "title": "Join",
-            "initialRun": true,
-            "parameters": [
-              {
-                "name": "meetingId",
-                "description": "Enter meeting id",
-                "title": "Meeting Id"
-              }
-            ]
-          }
-        ]
-      }
-    ],
     "permissions": [],
     "validDomains": []
 }

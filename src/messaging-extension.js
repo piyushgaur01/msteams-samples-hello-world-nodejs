@@ -18,25 +18,30 @@ module.exports.setup = function () {
 
         // Build the data to send
         var attachments = [];
-
+        
         // Generate 5 results to send with fake text and fake images
         //for (var i = 0; i < 5; i++) {
-        attachments.push(
-            new builder.ThumbnailCard()
-                .title('Click to join meeting')
-                .text()
-                .buttons([
-                    {
-                        type: "openUrl",
-                        title: "Join Meeting",
-                        value: `h323:${title}`
-                    }
-                ])
-                //.text(faker.lorem.paragraph())
-                //.images([new builder.CardImage().url(`${randomImageUrl}?random=${i}`)])
-                .toAttachment());
+        // attachments.push(
+        //     new builder.ThumbnailCard()
+        //         .title('Click to join meeting')
+        //         .text()
+        //         .buttons([
+        //             {
+        //                 type: "openUrl",
+        //                 title: "Join Meeting",
+        //                 value: `h323:${title}`
+        //             }
+        //         ])
+        //         //.text(faker.lorem.paragraph())
+        //         //.images([new builder.CardImage().url(`${randomImageUrl}?random=${i}`)])
+        //         .toAttachment());
         //}
 
+
+        // attachments.push(
+        //     new builder.Message()
+        //     .addAttachment()
+        // )
         // Build the response to be sent
         var response = teamsBuilder.ComposeExtensionResponse
             .result('list')
