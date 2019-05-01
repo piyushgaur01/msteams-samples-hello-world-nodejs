@@ -30,9 +30,10 @@ module.exports.setup = function (app) {
         var textArray = text.split(' ');
         const command = textArray[0];
         const input = textArray[1];
+        let card;
         switch (command) {
             case 'join':
-                let card = {
+                card = {
                     'contentType': 'application/vnd.microsoft.card.adaptive',
                     'content': {
                         "type": "AdaptiveCard",
@@ -57,7 +58,7 @@ module.exports.setup = function (app) {
                 break;
 
             case 'openUrl':
-                let card = {
+                card = {
                     'contentType': 'application/vnd.microsoft.card.adaptive',
                     'content': {
                         "type": "AdaptiveCard",
@@ -81,7 +82,7 @@ module.exports.setup = function (app) {
                 msg = new builder.Message(session).addAttachment(card);
                 break;
             default:
-                let card = {
+                card = {
                     'contentType': 'application/vnd.microsoft.card.adaptive',
                     'content': {
                         "type": "AdaptiveCard",
