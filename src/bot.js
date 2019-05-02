@@ -25,18 +25,18 @@ module.exports.setup = function (app) {
     function createCard(cardType, input) {
         const cardTypes = {
             chat: {
-                imageUrl: 'https://image.flaticon.com/icons/svg/838/838615.svg',
+                imageUrl: 'https://i.ibb.co/y581QQL/live-chat.png',
                 textblock: 'Chat with a Poly representative',
                 actionUrl: 'https://www.poly.com', // TODO: update url
             },
             support: {
-                imageUrl: 'https://image.flaticon.com/icons/svg/1716/1716937.svg',
+                imageUrl: 'https://i.ibb.co/3RBmcwt/customer-service.png',
                 //imageUrl: 'https://image.flaticon.com/icons/svg/1444/1444148.svg',
                 textblock: input,
                 actionUrl: encodeURI(`https://support.polycom.com/PolycomService/coveo/search.htm#q=${input}`),
             },
             dial: {
-                imageUrl: 'https://image.flaticon.com/icons/svg/228/228597.svg',
+                imageUrl: 'https://i.ibb.co/DYD9NtT/call.png',
                 textblock: `Dial ${input}`,
                 actionUrl: `h323://${input}`
             }

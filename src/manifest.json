@@ -64,5 +64,5 @@
         }
     ],
     "permissions": [],
-    "validDomains": []
+    "validDomains": ["*.flaticon.com"]
 }
