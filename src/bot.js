@@ -5,9 +5,9 @@ module.exports.setup = function (app) {
     var teams = require('botbuilder-teams');
     var config = require('config');
 
-    if (!config.has("bot.appId")) {
+    if (!config.has('bot.appId')) {
         // We are running locally; fix up the location of the config directory and re-intialize config
-        process.env.NODE_CONFIG_DIR = "../config";
+        process.env.NODE_CONFIG_DIR = '../config';
         delete require.cache[require.resolve('config')];
         config = require('config');
     }
@@ -16,11 +16,84 @@ module.exports.setup = function (app) {
         // It is a bad idea to store secrets in config files. We try to read the settings from
         // the config file (/config/default.json) OR then environment variables.
         // See node config module (https://www.npmjs.com/package/config) on how to create config files for your Node.js environment.
-        appId: config.get("bot.appId"),
-        appPassword: config.get("bot.appPassword")
+        appId: config.get('bot.appId'),
+        appPassword: config.get('bot.appPassword')
     });
 
     var inMemoryBotStorage = new builder.MemoryBotStorage();
+
+    function createCard(cardType, input) {
+        const cardTypes = {
+            chat: {
+                imageUrl: 'https://image.flaticon.com/icons/svg/838/838615.svg',
+                textblock: 'Chat with a Poly representative',
+                actionUrl: 'https://www.poly.com', // TODO: update url
+            },
+            support: {
+                imageUrl: 'https://image.flaticon.com/icons/svg/1716/1716937.svg',
+                //imageUrl: 'https://image.flaticon.com/icons/svg/1444/1444148.svg',
+                textblock: input,
+                actionUrl: encodeURI(`https://support.polycom.com/PolycomService/coveo/search.htm#q=${input}`),
+            },
+            dial: {
+                imageUrl: 'https://image.flaticon.com/icons/svg/228/228597.svg',
+                textblock: `Dial ${input}`,
+                actionUrl: `h323://${input}`
+            }
+        };
+
+        return {
+            'contentType': 'application/vnd.microsoft.card.adaptive',
+            'content': {
+                '$schema': 'http://adaptivecards.io/schemas/adaptive-card.json',
+                'version': '1.0',
+                'type': 'AdaptiveCard',
+                'body': [
+                    {
+                        'type': 'Container',
+                        'items': [
+                            {
+                                'type': 'ColumnSet',
+                                'columns': [
+                                    {
+                                        'type': 'Column',
+                                        'width': 'auto',
+                                        'items': [
+                                            {
+                                                'type': 'Image',
+                                                'url': cardTypes[cardType].imageUrl,
+                                                'size': 'small',
+                                                'style': 'person'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        'type': 'Column',
+                                        'width': 'stretch',
+                                        'items': [
+                                            {
+                                                'type': 'TextBlock',
+                                                'text': cardTypes[cardType].textblock,
+                                                'weight': 'bolder',
+                                                'wrap': true
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                'actions': [
+                    {
+                        'type': 'Action.OpenUrl',
+                        'title': 'Click here!',
+                        'url': cardTypes[cardType].actionUrl
+                    }
+                ]
+            }
+        };
+    }
 
     // Define a simple bot with the above connector that echoes what it received
     var bot = new builder.UniversalBot(connector, function (session) {
@@ -28,66 +101,31 @@ module.exports.setup = function (app) {
         // Message might contain @mentions which we would like to strip off in the response
         var text = teams.TeamsMessage.getTextWithoutMentions(session.message);
         var textArray = text.split(' ');
-        const command = textArray[0];
+        const command = textArray[0].toLowerCase();
         const input = textArray[1];
-        let card;
         switch (command) {
-            case 'join':
-                card = {
-                    'contentType': 'application/vnd.microsoft.card.adaptive',
-                    'content': {
-                        "type": "AdaptiveCard",
-                        "body": [
-                            {
-                                "type": "TextBlock",
-                                "text": "Click below to join meeting."
-                            }
-                        ],
-                        "actions": [
-                            {
-                                "type": "Action.OpenUrl",
-                                "title": "Join Meeting",
-                                "url": `h323://${input}`
-                            }
-                        ],
-                        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                        "version": "1.0"
-                    }
-                };
-                msg = new builder.Message(session).addAttachment(card);
+            case 'chat':
+                msg = new builder.Message(session).addAttachment(createCard('chat', input));
                 break;
-
-            case 'url':
-                card = {
-                    'contentType': 'application/vnd.microsoft.card.adaptive',
-                    'content': {
-                        "type": "AdaptiveCard",
-                        "actions": [
-                            {
-                                "type": "Action.OpenUrl",
-                                "title": `Open ${input}`,
-                                "url": `https://${input}`
-                            }
-                        ],
-                        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                        "version": "1.0"
-                    }
-                };
-                msg = new builder.Message(session).addAttachment(card);
+            case 'dial':
+                msg = new builder.Message(session).addAttachment(createCard('dial', input));
+                break;
+            case 'dial':
+                msg = new builder.Message(session).addAttachment(createCard('support', input));
                 break;
             default:
                 card = {
                     'contentType': 'application/vnd.microsoft.card.adaptive',
                     'content': {
-                        "type": "AdaptiveCard",
-                        "body": [
+                        'type': 'AdaptiveCard',
+                        'body': [
                             {
-                                "type": "TextBlock",
-                                "text": "Command not found."
+                                'type': 'TextBlock',
+                                'text': 'Sorry! I do not understand that yet.'
                             }
                         ],
-                        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                        "version": "1.0"
+                        '$schema': 'http://adaptivecards.io/schemas/adaptive-card.json',
+                        'version': '1.0'
                     }
                 };
                 msg = new builder.Message(session).addAttachment(card);

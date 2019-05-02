@@ -3,20 +3,20 @@
     "manifestVersion": "1.3",
     "version": "1.0.0",
     "id": "743fe636-3405-4f09-bc8a-96d12883db40",
-    "packageName": "com.contoso.helloworld",
+    "packageName": "com.poly.bot",
     "developer": {
-        "name": "Piyush",
+        "name": "Piyush Gaur",
         "websiteUrl": "https://www.poly.com",
         "privacyUrl": "https://www.poly.com/privacy",
         "termsOfUseUrl": "https://www.poly.com/about"
     },
     "name": {
-        "short": "Poly",
-        "full": "Poly Bot for poly meetings."
+        "short": "Poly Bot",
+        "full": "I can help you join meetings."
     },
     "description": {
-        "short": "Poly Bot for poly meetings.",
-        "full": "Testing poly bot for joining meetings."
+        "short": "I can help you join meetings.",
+        "full": "I can help you join meetings, connect with a Poly representatives and search knowledge base for FAQs."
     },
     "icons": {
         "outline": "poly20x20.png",
@@ -38,6 +38,28 @@
             "scopes": [
                 "personal",
                 "team"
+            ],
+            "commandLists": [
+                {
+                    "scopes": [
+                        "team",
+                        "personal"
+                    ],
+                    "commands": [
+                        {
+                            "title": "Chat",
+                            "description": "Chat with a poly representative"
+                        },
+                        {
+                            "title": "Dial [Dial string or VMR number]",
+                            "description": "Dial a call using RP Mobile/Desktop client"
+                        },
+                        {
+                            "title": "Support [FAQ]",
+                            "description": "Search Poly knowledge base"
+                        }
+                    ]
+                }
             ]
         }
     ],
