@@ -100,9 +100,10 @@ module.exports.setup = function (app) {
         let msg;
         // Message might contain @mentions which we would like to strip off in the response
         var text = teams.TeamsMessage.getTextWithoutMentions(session.message);
-        var textArray = text.split(' ');
-        const command = textArray[0].toLowerCase();
-        const input = textArray[1];
+        var textArray = text.toLowerCase().split(' ');
+        // const command = textArray[0].toLowerCase();
+        const command = textArray.slice(0,1).join(' ');
+        const input = textArray.slice(1).join(' ');
         switch (command) {
             case 'chat':
                 msg = new builder.Message(session).addAttachment(createCard('chat', input));
@@ -110,11 +111,11 @@ module.exports.setup = function (app) {
             case 'dial':
                 msg = new builder.Message(session).addAttachment(createCard('dial', input));
                 break;
-            case 'dial':
+            case 'support':
                 msg = new builder.Message(session).addAttachment(createCard('support', input));
                 break;
             default:
-                card = {
+                let card = {
                     'contentType': 'application/vnd.microsoft.card.adaptive',
                     'content': {
                         'type': 'AdaptiveCard',

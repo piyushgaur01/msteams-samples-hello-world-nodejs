@@ -51,12 +51,12 @@
                             "description": "Chat with a poly representative"
                         },
                         {
-                            "title": "Dial [Dial string or VMR number]",
-                            "description": "Dial a call using RP Mobile/Desktop client"
+                            "title": "Dial",
+                            "description": "Dial [Dial string or VMR number] a call using RP Mobile/Desktop client"
                         },
                         {
-                            "title": "Support [FAQ]",
-                            "description": "Search Poly knowledge base"
+                            "title": "Support",
+                            "description": "Search Poly knowledge base / FAQs"
                         }
                     ]
                 }
