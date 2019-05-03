@@ -29,7 +29,7 @@ module.exports.setup = function (app) {
                 textblock: 'Chat with a Poly representative',
                 actionUrl: 'https://www.poly.com', // TODO: update url
             },
-            support: {
+            search: {
                 imageUrl: 'https://i.ibb.co/hXD73Wt/question.png',
                 textblock: input,
                 actionUrl: encodeURI(`https://support.polycom.com/PolycomService/coveo/search.htm#q=${input}`),
