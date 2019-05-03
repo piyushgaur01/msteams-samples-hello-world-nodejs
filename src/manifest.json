@@ -1,28 +1,28 @@
 {
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.3/MicrosoftTeams.schema.json",
     "manifestVersion": "1.3",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "id": "743fe636-3405-4f09-bc8a-96d12883db40",
     "packageName": "com.poly.bot",
     "developer": {
-        "name": "Piyush Gaur",
+        "name": "Poly",
         "websiteUrl": "https://www.poly.com",
         "privacyUrl": "https://www.poly.com/privacy",
-        "termsOfUseUrl": "https://www.poly.com/about"
+        "termsOfUseUrl": "https://www.poly.com/terms"
     },
     "name": {
         "short": "Poly Bot",
-        "full": "I can help you join meetings."
+        "full": "I can help you dial calls, search the Poly knowledge base, or talk with a Poly representative"
     },
     "description": {
-        "short": "I can help you join meetings.",
-        "full": "I can help you join meetings, connect with a Poly representatives and search knowledge base for FAQs."
+        "short": "Dial calls, search the Poly knowledge base, or talk with a Poly representative",
+        "full": "Poly Bot can help you dial calls, search the Poly knowledge base, or talk with a Poly representative."
     },
     "icons": {
         "outline": "poly20x20.png",
         "color": "poly96x96.png"
     },
-    "accentColor": "#ffffff",
+    "accentColor": "#F9F9FA",
     "configurableTabs": [
         {
             "configurationUrl": "https://poly-bots.herokuapp.com/configure",
@@ -52,11 +52,11 @@
                         },
                         {
                             "title": "Dial",
-                            "description": "Dial [Dial string or VMR number] a call using RP Mobile/Desktop client"
+                            "description": "Dial [dial string] via Poly RealPresence Desktop/Mobile"
                         },
                         {
-                            "title": "Support",
-                            "description": "Search Poly knowledge base / FAQs"
+                            "title": "Search",
+                            "description": "Search the Poly knowledgebase"
                         }
                     ]
                 }
@@ -64,5 +64,5 @@
         }
     ],
     "permissions": [],
-    "validDomains": ["*.flaticon.com"]
+    "validDomains": []
 }

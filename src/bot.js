@@ -37,7 +37,7 @@ module.exports.setup = function (app) {
             dial: {
                 imageUrl: 'https://i.ibb.co/DYD9NtT/call.png',
                 textblock: `Dial ${input}`,
-                actionUrl: `h323://${input}`
+                actionUrl: `h323:${input}`
             }
         };
 
@@ -99,19 +99,18 @@ module.exports.setup = function (app) {
         let msg;
         // Message might contain @mentions which we would like to strip off in the response
         var text = teams.TeamsMessage.getTextWithoutMentions(session.message);
-        var textArray = text.toLowerCase().split(' ');
-        // const command = textArray[0].toLowerCase();
-        const command = textArray.slice(0,1).join(' ');
+        var textArray = text.split(' ');
+        const command = textArray.slice(0,1).join(' ').toLowerCase();
         const input = textArray.slice(1).join(' ');
         switch (command) {
             case 'chat':
-                msg = new builder.Message(session).addAttachment(createCard('chat', input));
+                msg = new builder.Message(session).addAttachment(createCard(command, input));
                 break;
             case 'dial':
-                msg = new builder.Message(session).addAttachment(createCard('dial', input));
+                msg = new builder.Message(session).addAttachment(createCard(command, input));
                 break;
-            case 'support':
-                msg = new builder.Message(session).addAttachment(createCard('support', input));
+            case 'search':
+                msg = new builder.Message(session).addAttachment(createCard(command, input));
                 break;
             default:
                 let card = {
